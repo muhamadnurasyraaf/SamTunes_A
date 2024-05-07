@@ -6,22 +6,33 @@
       <p class="text-sm text-gray-400">*for Vimigo technical assessment usage only</p>
       <p class="mb-4 text-lg text-gray-600">Discover and enjoy your favorite music.</p>
       <div class="flex space-x-4">
-        <button class="px-4 py-2 text-white bg-blue-500 rounded-md shadow-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">Explore</button>
+        <a href="http://playlist.SamTunes.test" class="px-4 py-2 text-white bg-blue-500 rounded-md shadow-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">Explore</a>
         <a href="/login" class="px-4 py-2 text-white bg-gray-500 rounded-md shadow-lg hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-50">Sign In</a>
       </div>
     </div>
+    <Footer />
   </template>
   
-  <script>
+ <script>
 import Navbar from './components/Navbar.vue';
-
-  export default {
-    name: 'HomePage',
-    components:{
-      Navbar,
-    }
-  };
-  </script>
+import Footer from './components/Footer.vue';
+export default{
+  methods:{
+    explore() {
+      axios.get('http://playlist.SamTunes.test')
+        .then(response => {
+          
+        })
+        .catch(error => {
+          console.error('Error exploring:', error);
+        });
+      }
+  },
+  components:{
+    Navbar,Footer
+  }
+}
+</script>
   
   
   

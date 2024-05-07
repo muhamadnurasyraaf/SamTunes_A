@@ -14,6 +14,10 @@ class AuthService
         return Inertia::render('register');
     }
 
+    public function checkAuth(){
+        return auth()->check();
+    }
+
     public function loginUser($data){
 
     }

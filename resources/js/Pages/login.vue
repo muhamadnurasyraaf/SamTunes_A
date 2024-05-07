@@ -1,6 +1,6 @@
 <template>
   <Navbar />
-    <div class="max-w-md px-4 py-8 mx-auto">
+    <div class="h-[87vh] max-w-md px-4 py-8 mx-auto">
       <h2 class="mb-4 text-3xl font-semibold">Login</h2>
       <div class="overflow-hidden bg-white rounded-lg shadow-md">
         <div class="p-6">
@@ -16,19 +16,23 @@
             <div class="flex justify-end">
               <button type="submit" class="px-4 py-2 text-white bg-blue-500 rounded-md shadow-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">Login</button>
             </div>
+            <small>You don't have an account? <a href="/register">Register here</a></small>
           </form>
         </div>
       </div>
     </div>
+    <Footer />
   </template>
   
   <script>
   import Navbar from './components/Navbar.vue';
+  import Footer from './components/Footer.vue';
+  import { Inertia } from '@inertiajs/inertia';
   
   export default {
     name: 'LoginForm',
     components:{
-      Navbar,
+      Navbar,Footer
     },
     data() {
       return {
@@ -40,11 +44,16 @@
     },
     methods: {
       login() {
-        // Reset form after submission
-        this.formData = {
-          email: '',
-          password: ''
-        };
+        Inertia.post('/login',this.formData)
+        .then(() => {
+            this.formData = {
+              email: '',
+              password: '',
+            }
+        })
+          .catch(error =>{
+            console.error("Login failed : ", error.response.data);
+          })
       }
     }
   };
